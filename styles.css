@@ -1,0 +1,14 @@
+#messages{
+			height: 50vh;
+			border: 1px solid black;
+}
+
+#users{
+	height: 30vh;
+	border-radius: 20px;
+	margin-right: 5px;
+	background-color: lightgray;
+}
+h1{
+	text-align: center;
+}

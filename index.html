@@ -5,6 +5,8 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+	<link rel="stylesheet" type="text/css" href="styles.css">	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
@@ -14,13 +16,29 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12" id="users">
+			<div class="col-sm-3" id="users-header">
+				<h3>Connected Users</h3>
 			<!-- Users will go in here! -->
 			</div>
-			<div class="col-sm-12">
-				<button id="send-message" class="btn btn-primary">
-					Click to send message to server
-				</button>
+		</div>	
+
+		<div class="row">
+			<div class="col-sm-3" id="users">				
+			<!-- Users will go in here! -->
+			</div>
+			
+			<div class="col-sm-6" id="messages">
+				
+			</div>
+
+
+			<div class="col-sm-12 text-center">
+				<form id="submit-message">
+					<input type="text" id="new-message">
+					<button type="submit" id="send-message" class="btn btn-primary">
+						Send
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -43,9 +61,22 @@
 		usersDiv.innerHTML += `<div class="col-sm-12">${userName}</div>`;
 	});
 
-	$('#send-message').click(function(){
-		socketio.emit('sendMessage');
+	$('#submit-message').submit(function(event){
+		event.preventDefault();
+		var newMessage = $('#new-message').val();
+		socketio.emit('messageToServer',{
+			newMessage:newMessage,
+			name:name
+		});
 	});
+
+	socketio.on('messageToClient',(message)=>{
+		$('#messages').prepend('<p>' +message+'</p>');
+	})
+
+	// $('#send-message').click(function(){
+	// 	socketio.emit('sendMessage');
+	// });
 
 
 </script>

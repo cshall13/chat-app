@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cshall13/nodeJS-work/issues"
   },
-  "homepage": "https://github.com/cshall13/nodeJS-work#readme"
+  "homepage": "https://github.com/cshall13/nodeJS-work#readme",
+  "dependencies": {
+    "socket.io": "^2.0.1"
+  }
 }

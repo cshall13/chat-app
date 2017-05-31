@@ -29,7 +29,17 @@ var server = http.createServer(function(req, res){
 				res.end(data);
 			}
 		});
-	}	
+	}else if(req.url == '/config.js'){
+		fs.readFile('config.js','utf-8',(error,data)=>{
+			if(error){
+				res.writeHead(500,{'content-type':'text/html'});
+				res.end('Internal Server Error');
+			}else{
+				res.writeHead(200,{'content-type':'application/javascript'});
+				res.end(data);
+			}
+		});
+	}
 });
 
 var io = socketio.listen(server);
@@ -53,3 +63,6 @@ io.sockets.on('connect',(socket)=>{
 // console.log("The node file is working.")
 server.listen(8080);
 console.log("Listening on port 8080");
+
+
+
